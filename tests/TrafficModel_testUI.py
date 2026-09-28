@@ -1372,8 +1372,8 @@ def build_export_frames(params, env_results, comparison_params=None, comparison_
     """Два кадра экспорта: «meta» и «exp_epoch».
 
     meta: первая строка — имена параметров в системе, вторая (и далее в режиме
-    сравнения) — значения параметров набора. exp_epoch: ПОЛНЫЙ массив динамики
-    по эпохам (каждая строка — одна эпоха, каждая колонка — метрика).
+    сравнения) — значения параметров набора. exp_epoch: сводка «средние после
+    10 эпох» по всем метрикам (в режиме сравнения — с суффиксами _1/_2).
     """
     if comparison_params is not None and comparison_env is not None:
         meta_df = pd.DataFrame(
@@ -1383,15 +1383,13 @@ def build_export_frames(params, env_results, comparison_params=None, comparison_
         meta_df = pd.DataFrame([list(params.values())], columns=list(params.keys()))
 
     if comparison_env is not None:
-        di1 = {col + '_1': list(getattr(env_results, attr)) for col, attr in _METRIC_COLUMNS}
-        di2 = {col + '_2': list(getattr(comparison_env, attr)) for col, attr in _METRIC_COLUMNS}
+        di1 = {col + '_1': getattr(env_results, attr) for col, attr in _METRIC_COLUMNS}
+        di2 = {col + '_2': getattr(comparison_env, attr) for col, attr in _METRIC_COLUMNS}
         di = {**di1, **di2}
     else:
-        di = {col: list(getattr(env_results, attr)) for col, attr in _METRIC_COLUMNS}
+        di = {col: getattr(env_results, attr) for col, attr in _METRIC_COLUMNS}
 
-    # Полный массив: каждая строка = эпоха, каждая колонка = метрика
-    summary = pd.DataFrame(di)
-    summary.insert(0, 'epoch', range(len(summary)))
+    summary = pd.DataFrame([{k: _tail_mean(di[k]) for k in di}])
     return meta_df, summary
 
 
