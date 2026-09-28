@@ -1,0 +1,13 @@
+{
+  "description": "Held-out (val+test) rows of the relabelled balanced split, seed=42",
+  "source": "koap_vectors_balanced_relabeled/vectors.csv",
+  "seed": 42,
+  "train_rows": 44373,
+  "val_rows": 9510,
+  "test_rows": 9497,
+  "article_distribution": {
+    "128": 9505,
+    "2641": 9502
+  },
+  "total_rows": 19007
+}

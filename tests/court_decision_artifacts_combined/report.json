@@ -1,0 +1,285 @@
+{
+  "seed": 42,
+  "method": "graph",
+  "balance": "strata_weights",
+  "metric_rationale": "decision_score averages macro-F1 for binary/class targets and normalized-MAE scores for regression targets; macro-F1 is preferred under article/outcome imbalance.",
+  "regulation": {
+    "source": "embedded_verified_registry",
+    "version": "verified_registry_v2_2026-07-20",
+    "feature_count": 39,
+    "postprocessing": "statutory availability and min/max sanction constraints"
+  },
+  "feature_count": 70,
+  "target_columns": [
+    "d_imprisonment_epochs",
+    "d_license_revocation_epochs",
+    "d_conditional",
+    "d_fine_rub",
+    "d_travel_ban",
+    "d_reconciliation",
+    "d_costs_on_state",
+    "d_costs_amount_rub",
+    "d_self_recusal"
+  ],
+  "rows": {
+    "all": 63380,
+    "train": 44373,
+    "val": 9510,
+    "test": 9497
+  },
+  "article_distribution": {
+    "128": 31690,
+    "2641": 31690
+  },
+  "elapsed_seconds": 75.874,
+  "val_metrics": {
+    "split": "val",
+    "decision_score": 0.69336,
+    "legally_constrained_decision_score": 0.692181,
+    "substantive_score": 0.900308,
+    "empty_prone_score": 0.589885,
+    "balanced_article_score": 0.716312,
+    "article_score_gap": 0.22111,
+    "by_article": {
+      "128": {
+        "support": 4755,
+        "decision_score": 0.826867,
+        "substantive_score": 0.941114,
+        "empty_prone_score": 0.769744
+      },
+      "2641": {
+        "support": 4755,
+        "decision_score": 0.605757,
+        "substantive_score": 0.859603,
+        "empty_prone_score": 0.478835
+      }
+    },
+    "by_target": {
+      "d_imprisonment_epochs": {
+        "mae": 0.080917,
+        "rmse": 0.499761,
+        "normalized_mae_score": 0.948942,
+        "support": 9510
+      },
+      "d_license_revocation_epochs": {
+        "mae": 0.624016,
+        "rmse": 1.126611,
+        "normalized_mae_score": 0.893858,
+        "support": 9510
+      },
+      "d_conditional": {
+        "acc": 0.636383,
+        "macro_f1": 0.48096,
+        "support": 9510,
+        "positive_rate": 0.051525
+      },
+      "d_fine_rub": {
+        "mae": 7906.821289,
+        "rmse": 34687.585938,
+        "normalized_mae_score": 0.858125,
+        "support": 9510
+      },
+      "d_travel_ban": {
+        "acc": 0.721346,
+        "macro_f1": 0.693339,
+        "support": 9510,
+        "positive_rate": 0.214511
+      },
+      "d_reconciliation": {
+        "acc": 0.999895,
+        "macro_f1": 0.499974,
+        "support": 9510,
+        "positive_rate": 0.0
+      },
+      "d_costs_on_state": {
+        "acc": 0.809043,
+        "macro_f1": 0.45367,
+        "support": 9510,
+        "positive_rate": 0.002313
+      },
+      "d_costs_amount_rub": {
+        "mae": 104.138832,
+        "rmse": 1076.970581,
+        "normalized_mae_score": 0.911397,
+        "support": 9510
+      },
+      "d_self_recusal": {
+        "acc": 0.999895,
+        "macro_f1": 0.499974,
+        "support": 9510,
+        "positive_rate": 0.000105
+      }
+    },
+    "legal_constraint_report": {
+      "regulation_version": "verified_registry_v2_2026-07-20",
+      "rows": 9510,
+      "rows_adjusted": 4749,
+      "row_adjustment_rate": 0.4993690851735016,
+      "adjustment_count": 6380,
+      "adjustments_by_target": {
+        "d_fine_rub": 4124,
+        "d_license_revocation_epochs": 1626,
+        "d_imprisonment_epochs": 630
+      },
+      "adjustments_by_reason": {
+        "базовый диапазон штрафа [30000.0, 30000.0] руб.": 2602,
+        "базовый диапазон лишения права [18.0, 24.0] месяцев": 1623,
+        "диапазон административного ареста [10.0, 15.0] суток": 621,
+        "базовый диапазон штрафа [45000.0, 45000.0] руб.": 1434,
+        "лишение права отсутствует в применимом профиле": 1,
+        "базовый диапазон штрафа [200000.0, 300000.0] руб.": 69,
+        "диапазон лишения свободы [0.0, 24.0] месяцев": 4,
+        "диапазон лишения свободы [2.0, 36.0] месяцев": 5,
+        "базовый диапазон штрафа [200000.0, 500000.0] руб.": 17,
+        "базовый диапазон штрафа [300000.0, 500000.0] руб.": 2,
+        "базовый диапазон лишения права [6.0, 72.0] месяцев": 1,
+        "базовый диапазон лишения права [0.0, 36.0] месяцев": 1
+      },
+      "rows_by_article": {
+        "128": 4755,
+        "2641": 4755
+      },
+      "adjusted_rows_by_article": {
+        "128": 4652,
+        "2641": 97
+      },
+      "adjustments_by_target_article": {
+        "d_fine_rub": {
+          "128": 4036,
+          "2641": 88
+        },
+        "d_license_revocation_epochs": {
+          "128": 1624,
+          "2641": 2
+        },
+        "d_imprisonment_epochs": {
+          "128": 621,
+          "2641": 9
+        }
+      }
+    }
+  },
+  "test_metrics": {
+    "split": "test",
+    "decision_score": 0.748775,
+    "legally_constrained_decision_score": 0.747235,
+    "substantive_score": 0.897903,
+    "empty_prone_score": 0.67421,
+    "balanced_article_score": 0.792735,
+    "article_score_gap": 0.262985,
+    "by_article": {
+      "128": {
+        "support": 4750,
+        "decision_score": 0.924227,
+        "substantive_score": 0.939383,
+        "empty_prone_score": 0.916649
+      },
+      "2641": {
+        "support": 4747,
+        "decision_score": 0.661242,
+        "substantive_score": 0.856328,
+        "empty_prone_score": 0.5637
+      }
+    },
+    "by_target": {
+      "d_imprisonment_epochs": {
+        "mae": 0.087351,
+        "rmse": 0.559955,
+        "normalized_mae_score": 0.946771,
+        "support": 9497
+      },
+      "d_license_revocation_epochs": {
+        "mae": 0.627916,
+        "rmse": 1.120386,
+        "normalized_mae_score": 0.893342,
+        "support": 9497
+      },
+      "d_conditional": {
+        "acc": 0.639465,
+        "macro_f1": 0.483648,
+        "support": 9497,
+        "positive_rate": 0.050963
+      },
+      "d_fine_rub": {
+        "mae": 8024.510254,
+        "rmse": 34362.871094,
+        "normalized_mae_score": 0.853597,
+        "support": 9497
+      },
+      "d_travel_ban": {
+        "acc": 0.727809,
+        "macro_f1": 0.701366,
+        "support": 9497,
+        "positive_rate": 0.219332
+      },
+      "d_reconciliation": {
+        "acc": 0.999895,
+        "macro_f1": 0.499974,
+        "support": 9497,
+        "positive_rate": 0.0
+      },
+      "d_costs_on_state": {
+        "acc": 0.813731,
+        "macro_f1": 0.455271,
+        "support": 9497,
+        "positive_rate": 0.002317
+      },
+      "d_costs_amount_rub": {
+        "mae": 97.698578,
+        "rmse": 939.213562,
+        "normalized_mae_score": 0.905003,
+        "support": 9497
+      },
+      "d_self_recusal": {
+        "acc": 1.0,
+        "macro_f1": 1.0,
+        "support": 9497,
+        "positive_rate": 0.0
+      }
+    },
+    "legal_constraint_report": {
+      "regulation_version": "verified_registry_v2_2026-07-20",
+      "rows": 9497,
+      "rows_adjusted": 4740,
+      "row_adjustment_rate": 0.4991049805201643,
+      "adjustment_count": 6299,
+      "adjustments_by_target": {
+        "d_fine_rub": 4116,
+        "d_license_revocation_epochs": 1551,
+        "d_imprisonment_epochs": 632
+      },
+      "adjustments_by_reason": {
+        "базовый диапазон штрафа [30000.0, 30000.0] руб.": 2566,
+        "базовый диапазон лишения права [18.0, 24.0] месяцев": 1550,
+        "диапазон административного ареста [10.0, 15.0] суток": 628,
+        "базовый диапазон штрафа [45000.0, 45000.0] руб.": 1466,
+        "лишение права отсутствует в применимом профиле": 1,
+        "базовый диапазон штрафа [200000.0, 300000.0] руб.": 70,
+        "диапазон лишения свободы [0.0, 24.0] месяцев": 2,
+        "диапазон лишения свободы [2.0, 36.0] месяцев": 2,
+        "базовый диапазон штрафа [200000.0, 500000.0] руб.": 14
+      },
+      "rows_by_article": {
+        "128": 4750,
+        "2641": 4747
+      },
+      "adjusted_rows_by_article": {
+        "128": 4652,
+        "2641": 88
+      },
+      "adjustments_by_target_article": {
+        "d_fine_rub": {
+          "128": 4032,
+          "2641": 84
+        },
+        "d_license_revocation_epochs": {
+          "128": 1551
+        },
+        "d_imprisonment_epochs": {
+          "128": 628,
+          "2641": 4
+        }
+      }
+    }
+  }
+}
